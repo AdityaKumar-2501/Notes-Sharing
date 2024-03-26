@@ -1,0 +1,55 @@
+.navbar {
+    margin: 0.5rem 0 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px #000000;
+    padding: 0 30px;
+}
+
+.navbar img {
+    margin: 30px;
+}
+
+.container {
+    display: flex;
+}
+
+.container a {
+    margin: 10px 20px;
+    text-decoration: none;
+    color: #000000;
+}
+
+#logo {
+    filter: drop-shadow(0 0 0.75rem rgb(94, 182, 237));
+}
+
+.container a:hover {
+    border-bottom: solid 3px green;
+}
+
+.container .search {
+    padding: 0 20px;
+    margin: 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.pages {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.btn-group {
+    margin: 10px;
+}
+
+.search input {
+    border-radius: 5px;
+    padding: 5px;
+    margin-right: 5px;
+}
