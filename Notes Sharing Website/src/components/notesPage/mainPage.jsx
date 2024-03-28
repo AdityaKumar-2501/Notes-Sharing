@@ -47,7 +47,7 @@ function NotesPage() {
       <h1>Notes</h1>
       <p>Note Id: {noteId}</p>
       <div
-        className=" m-4 flex justify-start items-center  w-fit flex-wrap "
+        className=" mr-[10%] ml-[10%] flex justify-start items-center  w-fit flex-wrap "
         id="foldersContainer"
       >
         {data ? (
@@ -57,10 +57,11 @@ function NotesPage() {
               id={folder.id}
               // url={folder.url}
               key={index}
+              type = {folder.mimeType}
             />
           ))
         ) : (
-          <div  className="w-[100vw] h-[50vh] flex justify-center  items-center text-center" >
+          <div  className="w-[77vw] h-[50vh] flex justify-center  items-center text-center" >
 
             <Loading />
           </div>

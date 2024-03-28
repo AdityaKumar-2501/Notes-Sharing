@@ -1,12 +1,22 @@
 import React from "react";
 import "./FolderButton.css"
-
 import { useNavigate } from "react-router-dom";
-function FolderButton({ name, url, id }) {
+
+
+
+function FolderButton({ name, url, id, type }) {
     const nav = useNavigate();
+
+    function handleClick(){
+      type.split(".").pop() === "folder" 
+      ? nav("/folder/"+id)
+       : null;
+    }
+
+
   return (
     <div>
-      <button class="Documents-btn" onClick={() => nav("/folder/"+id)}>
+      <button class="Documents-btn" onClick={handleClick}>
         <span class="folderContainer">
           <svg
             xmlns="http://www.w3.org/2000/svg"

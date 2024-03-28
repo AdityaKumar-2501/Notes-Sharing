@@ -10,6 +10,7 @@ import logo from "./logo.png";
 import { useNavigate } from "react-router-dom";
 
 const pages = [
+  { name : "Home", id:'home'},
   { name: "DSA", id: "dsa" },
   { name: "HTML", id: "html" },
   { name: "CSS", id: "css" },
@@ -96,7 +97,7 @@ function Navbar() {
             <ul class="navbar-nav py-4 py-md-0 flex">
               {pages.map((page, index) => (
                 <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 cursor-pointer" key={index}>
-                  <a class="nav-link " href={"/notes/" + page.id} >
+                  <a class="nav-link " href={ page.id == 'home'? "/" : "/notes/" + page.id} >
                     {page.name}
                   </a>
                 </li>
