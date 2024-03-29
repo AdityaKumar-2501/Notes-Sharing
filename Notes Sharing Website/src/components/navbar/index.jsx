@@ -6,22 +6,41 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { useState, useRef } from "react";
 import logo from "./logo.png";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
 
 const pages = [
     { name: "Home", id: "home" },
+    {
+        name: "Web Development",
+        items: [
+            { name: "HTML", id: "html" },
+            { name: "CSS", id: "css" },
+            { name: "JavaScript", id: "javascript" },
+        ],
+        // id: "webdevelopment",
+    },
     { name: "DSA", id: "dsa" },
-    { name: "HTML", id: "html" },
-    { name: "CSS", id: "css" },
-    { name: "Operating System", id: "operatingsystem" },
+    {
+        name: "Core Subjects",
+        items: [
+            { name: "Operating System", id: "operatingsystem" },
+            { name: "Computer Graphics", id: "computergraphics" },
+        ],
+        // id: "core",
+    },
+    {
+        name: "Programming",
+        items: [
+            { name: "JAVA", id: "java" },
+            { name: "Python", id: "python" },
+            { name: "JavaScript", id: "javascript" },
+        ],
+        // id: "programming",
+    },
     { name: "Android notes", id: "androidnotes" },
-    { name: "Computer Graphics", id: "computergraphics" },
     { name: "ML/AI", id: "ml-ai" },
-    { name: "JAVA", id: "java" },
-    { name: "Python", id: "python" },
-    { name: "JavaScript", id: "javascript" },
 ];
 
 function Navbar() {
@@ -97,35 +116,69 @@ function Navbar() {
 
     return (
         <div className="relative mb-[6%]">
-            <div class="navigation-wrap bg-light start-header start-style w-full">
-                <nav class="navbar navbar-expand-md navbar-light w-full">
+            <div className="navigation-wrap bg-light start-header start-style w-full">
+                <nav className="navbar navbar-expand-md navbar-light w-full">
                     <div
-                        class="z-[99] flex justify-evenly  items-center"
+                        className="z-[99] flex justify-evenly  items-center"
                         id="navbarSupportedContent"
                     >
-                        <ul class="navbar-nav py-4 py-md-0 flex">
+                        <ul className="navbar-nav py-4 py-md-0 flex">
                             {pages.map((page, index) => (
                                 <li
-                                    class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 cursor-pointer"
+                                    className="nav-item pl-4 pl-md-0 ml-0 ml-md-4 cursor-pointer"
                                     key={index}
                                 >
-                                    <a
-                                        class="nav-link "
-                                        href={
-                                            page.id == "home"
-                                                ? "/"
-                                                : "/notes/" + page.id
-                                        }
-                                    >
-                                        {page.name}
-                                    </a>
+                                    {page.items === undefined ? (
+                                        <a
+                                            className="nav-link "
+                                            href={
+                                                page.id == "home"
+                                                    ? "/"
+                                                    : page.id === undefined
+                                                    ? "#"
+                                                    : "/notes/" + page.id
+                                            }
+                                        >
+                                            {page.name}
+                                        </a>
+                                    ) : (
+                                        <a
+                                            className="nav-link dropdown-toggle"
+                                            data-toggle="dropdown"
+                                            href="#"
+                                            role="button"
+                                            aria-haspopup="true"
+                                            aria-expanded="false"
+                                        >
+                                            {page.name}
+                                        </a>
+                                    )}
+
+                                    {console.log(page.items)}
+                                    {/* {page.items
+                                        ? page.items.map(
+                                              (InnerPage, Innerindex) => (
+                                                  <div className="dropdown-menu">
+                                                      <a
+                                                          className="dropdown-item"
+                                                          href={
+                                                              "/notes/" +
+                                                              page.id
+                                                          }
+                                                      >
+                                                          {InnerPage.name}
+                                                      </a>
+                                                  </div>
+                                              )
+                                          )
+                                        : null} */}
                                 </li>
                             ))}
                         </ul>
                         <div className="container flex h-4/6 w-fit">
                             <div className="search flex justify-center items-center">
                                 <input
-                                    class="input"
+                                    className="input"
                                     name="text"
                                     placeholder="Search..."
                                     type="search"

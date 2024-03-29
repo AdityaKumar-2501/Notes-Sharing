@@ -10,6 +10,7 @@ import Error from "./components/pages/errorPage/error";
 import NotesPage from "./components/notesPage/mainPage";
 import FolderPage from "./components/folderPage/folderPage";
 import LoginPage from "./components/loginPage/login";
+import SignUp from "./components/loginPage/signup";
 
 function App() {
     return (
@@ -19,8 +20,10 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/upload" element={<Upload />} />
                     <Route path="/notes/:id" element={<NotesPage />} />
-                    <Route path="/folder/:id" element = {<FolderPage />} />
+                    <Route path="/folder/:id" element={<FolderPage />} />
                     <Route path="/login" element={<LoginPage />} />
+                    <Route path="/signup" element={<SignUp />} />
+
                     <Route path="*" element={<Error />} />
                 </Routes>
             </div>
