@@ -51,14 +51,6 @@ function Navbar() {
     //     setInput(value);
     //     input = "";
     // };
-    const [selected, setselected] = useState(null);
-
-  // when only one item is showing at a time
-  function handleSingleAccordion(getCurrentId) {
-    setselected(getCurrentId);
-    selected === getCurrentId ? setselected(null) : setselected(getCurrentId);
-  }
-
 
     const [isOpen, setIsOpen] = useState([false, false, false]);
 
@@ -165,16 +157,16 @@ function Navbar() {
                                                 type="button"
                                                 className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900"
                                                 id="menu-button"
-                                                aria-expanded={selected}
+                                                aria-expanded={isOpen[index]}
                                                 aria-haspopup="true"
                                                 onClick={() =>
-                                                    handleSingleAccordion(index)
+                                                    toggleMenu(index)
                                                 }
                                             >
                                                 {page.name}
                                                 <svg
                                                     className={`-mr-1 h-5 w-5 text-gray-400 transition-transform ${
-                                                        selected
+                                                        isOpen[index]
                                                             ? "rotate-180"
                                                             : ""
                                                     }`}
@@ -189,7 +181,7 @@ function Navbar() {
                                                     />
                                                 </svg>
                                             </button>
-                                            {selected && (
+                                            {isOpen[index] && (
                                                 <div className="absolute right-0 mt-2 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 w-full">
                                                     {page.items.map((item) => (
                                                         <a
