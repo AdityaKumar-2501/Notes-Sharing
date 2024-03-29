@@ -9,6 +9,8 @@ import Upload from "./components/pages/upload";
 import Error from "./components/pages/errorPage/error";
 import NotesPage from "./components/notesPage/mainPage";
 import FolderPage from "./components/folderPage/folderPage";
+import LoginPage from "./components/loginPage/login";
+
 function App() {
     return (
         <Router>
@@ -18,6 +20,7 @@ function App() {
                     <Route path="/upload" element={<Upload />} />
                     <Route path="/notes/:id" element={<NotesPage />} />
                     <Route path="/folder/:id" element = {<FolderPage />} />
+                    <Route path="/login" element={<LoginPage />} />
                     <Route path="*" element={<Error />} />
                 </Routes>
             </div>
