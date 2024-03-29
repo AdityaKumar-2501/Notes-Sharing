@@ -51,6 +51,24 @@ function Navbar() {
     //     setInput(value);
     //     input = "";
     // };
+    const [selected, setselected] = useState(null);
+
+  // when only one item is showing at a time
+  function handleSingleAccordion(getCurrentId) {
+    setselected(getCurrentId);
+    selected === getCurrentId ? setselected(null) : setselected(getCurrentId);
+  }
+
+
+    const [isOpen, setIsOpen] = useState([false, false, false]);
+
+    const toggleMenu = (index) => {
+        setIsOpen((prevIsOpen) => {
+            const newState = [...prevIsOpen];
+            newState[index] = !newState[index];
+            return newState;
+        });
+    };
 
     useEffect(() => {
         document.addEventListener("DOMContentLoaded", function () {
@@ -142,36 +160,55 @@ function Navbar() {
                                             {page.name}
                                         </a>
                                     ) : (
-                                        <a
-                                            className="nav-link dropdown-toggle"
-                                            data-toggle="dropdown"
-                                            href="#"
-                                            role="button"
-                                            aria-haspopup="true"
-                                            aria-expanded="false"
-                                        >
-                                            {page.name}
-                                        </a>
+                                        <div className="relative">
+                                            <button
+                                                type="button"
+                                                className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900"
+                                                id="menu-button"
+                                                aria-expanded={selected}
+                                                aria-haspopup="true"
+                                                onClick={() =>
+                                                    handleSingleAccordion(index)
+                                                }
+                                            >
+                                                {page.name}
+                                                <svg
+                                                    className={`-mr-1 h-5 w-5 text-gray-400 transition-transform ${
+                                                        selected
+                                                            ? "rotate-180"
+                                                            : ""
+                                                    }`}
+                                                    viewBox="0 0 20 20"
+                                                    fill="currentColor"
+                                                    aria-hidden="true"
+                                                >
+                                                    <path
+                                                        fillRule="evenodd"
+                                                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                                        clipRule="evenodd"
+                                                    />
+                                                </svg>
+                                            </button>
+                                            {selected && (
+                                                <div className="absolute right-0 mt-2 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 w-full">
+                                                    {page.items.map((item) => (
+                                                        <a
+                                                            href={
+                                                                item.id ===
+                                                                undefined
+                                                                    ? "#"
+                                                                    : "/notes/" +
+                                                                      item.id
+                                                            }
+                                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                        >
+                                                            {item.name}
+                                                        </a>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
                                     )}
-
-                                    {console.log(page.items)}
-                                    {/* {page.items
-                                        ? page.items.map(
-                                              (InnerPage, Innerindex) => (
-                                                  <div className="dropdown-menu">
-                                                      <a
-                                                          className="dropdown-item"
-                                                          href={
-                                                              "/notes/" +
-                                                              page.id
-                                                          }
-                                                      >
-                                                          {InnerPage.name}
-                                                      </a>
-                                                  </div>
-                                              )
-                                          )
-                                        : null} */}
                                 </li>
                             ))}
                         </ul>
