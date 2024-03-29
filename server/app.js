@@ -1,23 +1,7 @@
-// const { google } = require('googleapis');
-
-// require('dotenv').config();
-
-// const CLIENT_ID = process.env.CLIENT_ID;
-// const CLIENT_SECRET = process.env.CLIENT_SECRET;
-// const REDIRECT_URI = process.env.REDIRECT_URI;
-// const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
-
-// const oauth2client = new google.auth.OAuth2(CLIENT_ID,CLIENT_SECRET,REDIRECT_URI);
-
-// oauth2client.setCredentials({refresh_token: REFRESH_TOKEN});
-
 const fs = require('fs');
 const path = require('path');
 const { google } = require('googleapis');
 const { promisify } = require('util');
-
-const readFileAsync = promisify(fs.readFile);
-const writeFileAsync = promisify(fs.writeFile);
 
 // Load environment variables
 require('dotenv').config();
@@ -59,7 +43,7 @@ async function downloadFile(fileId) {
       })
       .pipe(dest);
   } catch (error) {
-    console.error('Error downloading file:', error);
+    console.error('Error downloading file:', error.message);
   }
 }
 
@@ -78,17 +62,38 @@ async function downloadFileByName(fileName) {
       }
   
       const fileId = files[0].id;
-      const destinationPath = path.join(downloadFolder, fileName);
-      await downloadFile(fileId, destinationPath);
+      await downloadFile(fileId);
     } catch (error) {
-      console.error('Error downloading file:', error);
+      console.error('Error downloading file by name:', error.message);
     }
+}
+
+/**
+ * Search for files in Google Drive
+ * @return {Array} Array of file objects
+ */
+async function searchFile() {
+  try {
+    const res = await drive.files.list({
+      fields: 'files(id, name)',
+      spaces: 'drive',
+    });
+    const files = res.data.files;
+    console.log('Found files:');
+    files.forEach(file => {
+      console.log(`${file.name} (${file.id})`);
+    });
+    return files;
+  } catch (error) {
+    console.error('Error searching for files:', error.message);
+    return [];
   }
-  
+}
 
 // Example usage:
 const fileId = '1Dhnyx-PAHQQbKyT8uCGRhG5XM-HrJhJJ'; // Replace with the ID of the file you want to download
-const filename = 'cg4'
+const filename = 'cg4';
 
 // downloadFile(fileId);
-downloadFileByName(filename)
+// downloadFileByName(filename);
+searchFile();
