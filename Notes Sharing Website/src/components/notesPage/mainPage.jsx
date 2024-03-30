@@ -4,6 +4,8 @@ import Navbar from "../navbar";
 import LoadData from "../landingPage/load-data";
 import Loading from "../Loading";
 import { useParams } from "react-router-dom";
+import BackButton from "../folderPage/components/backButton";
+import Error from "../pages/errorPage/error";
 
 function NotesPage() {
     const { id } = useParams();
@@ -15,21 +17,42 @@ function NotesPage() {
         {
             name: "DSA",
             id: "dsa",
-            folderId: "1LNl5MGK1tc0Ol148uErvRvgrMuwDJSAH",
+            folderId: "1X1Vy--C7yKIcPndn1Y4Ax31ZoTlTJCBn",
         },
         {
             name: "HTML",
             id: "html",
-            folderId: "1s_Oui4SkWJRRcT_iZN9E1QYl8NtH4q9Q",
+            folderId: "1xt5Rl8npvvjss8cNCqFRhXhx2xByhwTc",
         },
-        { name: "CSS", id: "css", folderId: "" },
+        {
+            name: "CSS",
+            id: "css",
+            folderId: "1cqwYi1sVPdl8IhqJKN55LpkjB7k4urC6",
+        },
         { name: "Operating System", id: "operatingsystem", folderId: "" },
-        { name: "Android notes", id: "androidnotes", folderId: "" },
-        { name: "Computer Graphics", id: "computergraphics", folderId: "" },
-        { name: "ML/AI", id: "ml-ai", folderId: "" },
-        { name: "JAVA", id: "java", folderId: "" },
-        { name: "Python", id: "python", folderId: "" },
-        { name: "JavaScript", id: "javascript", folderId: "" },
+        {
+            name: "Android notes",
+            id: "androidnotes",
+            folderId: "1VtGGq-slUjyLf1NIhbjfdo97owp_b_eP",
+        },
+        {
+            name: "Computer Graphics",
+            id: "computergraphics",
+            folderId: "1dMtNGT2RQ6fyX1DvMYbDwR_BYjYweKCS",
+        },
+        { name: "ML", id: "ml", folderId: "19zboLjvQ6R0-eCTvyfArsXroJb_bMDRL" },
+        { name: "AI", id: "ai", folderId: "1AtTkIllCv9KPGRidAy_MSsrrxa-o2fJ9" },
+        { name: "JAVA", id: "java", folderId: "1Bb99UyFtLzwXJN6NUSLbZa7mzqkvAvDg" },
+        {
+            name: "Python",
+            id: "python",
+            folderId: "1s2SVDFQ1XL4V-cH6UYz3pVO6OFPqHs6G",
+        },
+        {
+            name: "JavaScript",
+            id: "javascript",
+            folderId: "12SfpfKPxpJkGKyg2Bizbam-rveOJ9LKn",
+        },
     ];
 
     const getData = async (apiEnd) => {
@@ -63,8 +86,9 @@ function NotesPage() {
     return (
         <div className="">
             <Navbar />
-            <h1>Notes</h1>
-            <p>Note Id: {noteId}</p>
+            {/* <h1>Notes</h1>
+            <p>Note Id: {noteId}</p> */}
+            <BackButton />
             {loading ? (
                 <div className="w-[99vw] h-[50vh] flex justify-center items-center text-center">
                     <Loading />
@@ -86,7 +110,7 @@ function NotesPage() {
                         ))
                     ) : (
                         <div className="w-[77vw] h-[50vh] flex justify-center  items-center text-center">
-                            <Loading />
+                            <Error />
                         </div>
                     )}
                 </div>

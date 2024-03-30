@@ -1,7 +1,8 @@
 import React from "react";
 import "./styles.css";
+import { Link } from "react-router-dom";
 
-function error() {
+function Error() {
     return (
         <section classNameName="page_404">
             <h1 className="errorheading">404 Error Page</h1>
@@ -17,12 +18,12 @@ function error() {
                 </span>
             </section>
             <div className="link-container">
-                <a href="/" className="more-link">
+                <Link to="/" className="more-link">
                     Visit Home Page
-                </a>
+                </Link>
             </div>
         </section>
     );
 }
 
-export default error;
+export default Error;

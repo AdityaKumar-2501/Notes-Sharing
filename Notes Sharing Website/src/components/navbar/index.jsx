@@ -40,7 +40,8 @@ const pages = [
         // id: "programming",
     },
     { name: "Android notes", id: "androidnotes" },
-    { name: "ML/AI", id: "ml-ai" },
+    { name: "ML", id: "ml" },
+    { name: "AI", id: "ai" },
 ];
 
 function Navbar() {
