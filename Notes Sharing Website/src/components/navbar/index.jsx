@@ -52,15 +52,11 @@ function Navbar() {
     //     input = "";
     // };
 
-    const [isOpen, setIsOpen] = useState([false, false, false]);
+    const [selected, setSelected] = useState(null);
 
-    const toggleMenu = (index) => {
-        setIsOpen((prevIsOpen) => {
-            const newState = [...prevIsOpen];
-            newState[index] = !newState[index];
-            return newState;
-        });
-    };
+    function handleSelect(getCurrentId) {
+        setSelected(getCurrentId === selected ? null : getCurrentId);
+    }
 
     useEffect(() => {
         document.addEventListener("DOMContentLoaded", function () {
@@ -139,9 +135,9 @@ function Navbar() {
                                     key={index}
                                 >
                                     {page.items === undefined ? (
-                                        <a
+                                        <Link
                                             className="nav-link "
-                                            href={
+                                            to={
                                                 page.id == "home"
                                                     ? "/"
                                                     : page.id === undefined
@@ -150,23 +146,25 @@ function Navbar() {
                                             }
                                         >
                                             {page.name}
-                                        </a>
+                                        </Link>
                                     ) : (
                                         <div className="relative">
                                             <button
                                                 type="button"
                                                 className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900"
                                                 id="menu-button"
-                                                aria-expanded={isOpen[index]}
+                                                aria-expanded={
+                                                    selected === index
+                                                }
                                                 aria-haspopup="true"
                                                 onClick={() =>
-                                                    toggleMenu(index)
+                                                    handleSelect(index)
                                                 }
                                             >
                                                 {page.name}
                                                 <svg
                                                     className={`-mr-1 h-5 w-5 text-gray-400 transition-transform ${
-                                                        isOpen[index]
+                                                        selected === index
                                                             ? "rotate-180"
                                                             : ""
                                                     }`}
@@ -181,24 +179,27 @@ function Navbar() {
                                                     />
                                                 </svg>
                                             </button>
-                                            {isOpen[index] && (
+                                            {selected === index ? (
                                                 <div className="absolute right-0 mt-2 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 w-full">
-                                                    {page.items.map((item) => (
-                                                        <a
-                                                            href={
-                                                                item.id ===
-                                                                undefined
-                                                                    ? "#"
-                                                                    : "/notes/" +
-                                                                      item.id
-                                                            }
-                                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                                        >
-                                                            {item.name}
-                                                        </a>
-                                                    ))}
+                                                    {page.items.map(
+                                                        (item, innerIndex) => (
+                                                            <Link
+                                                                to={
+                                                                    item.id ===
+                                                                    undefined
+                                                                        ? "#"
+                                                                        : "/notes/" +
+                                                                          item.id
+                                                                }
+                                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                                key={innerIndex}
+                                                            >
+                                                                {item.name}
+                                                            </Link>
+                                                        )
+                                                    )}
                                                 </div>
-                                            )}
+                                            ) : null}
                                         </div>
                                     )}
                                 </li>
@@ -213,7 +214,7 @@ function Navbar() {
                                     type="search"
                                 />
                                 <IoSearchSharp
-                                    onClick={() => handleSeach(e.target.value)}
+                                    onClick={(e) => handleSeach(e.target.value)}
                                     size={25}
                                 />
                             </div>

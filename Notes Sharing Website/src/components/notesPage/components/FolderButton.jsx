@@ -16,15 +16,15 @@ function FolderButton({ name, url, id, type }) {
 
   return (
     <div>
-      <button class="Documents-btn" onClick={handleClick}>
-        <span class="folderContainer">
+      <button className="Documents-btn" onClick={handleClick}>
+        <span className="folderContainer">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 146 113"
             height="113"
             width="146"
-            class="fileBack"
+            className="fileBack"
           >
             <path
               fill="url(#paint0_linear_117_4)"
@@ -50,7 +50,7 @@ function FolderButton({ name, url, id, type }) {
             viewBox="0 0 88 99"
             height="99"
             width="88"
-            class="filePage"
+            className="filePage"
           >
             <rect
               fill="url(#paint0_linear_117_6)"
@@ -78,7 +78,7 @@ function FolderButton({ name, url, id, type }) {
             viewBox="0 0 160 79"
             height="79"
             width="160"
-            class="fileFront"
+            className="fileFront"
           >
             <path
               fill="url(#paint0_linear_117_5)"
@@ -99,7 +99,7 @@ function FolderButton({ name, url, id, type }) {
             </defs>
           </svg>
         </span>
-        <p class="text">{name}</p>
+        <p className="text">{name}</p>
       </button>
     </div>
   );
