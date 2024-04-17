@@ -61,9 +61,16 @@ function LOLButton() {
 }
 function PTTButton() {
     return (
-        <div className="icon orange">
-            <span className="doc-icon ptt">⧉</span>
-            <span className="doc-type">PTT</span>
+        // <div className="icon orange">
+        //     <span className="doc-icon ptt">⧉</span>
+        //     <span className="doc-type">PTT</span>
+        // </div>
+        <div className="">
+            <img
+                src={`https://pro.alchemdigital.com/api/extension-image/ppt`}
+                className="w-[150px] h-[150px] my-0"
+                alt="icon"
+            />
         </div>
     );
 }
@@ -77,6 +84,7 @@ function PDFButton() {
                 className="w-[150px] h-[150px] my-0"
                 alt="icon"
             />
+            
         </div>
     );
 }

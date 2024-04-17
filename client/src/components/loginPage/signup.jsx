@@ -1,13 +1,45 @@
-import React from "react";
+import React,{useState} from "react";
 import "./styles.css";
 import Navbar from "../navbar";
 import PasswordToggle from "./passwordToggle";
 
 function SignUp() {
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [passwordsMatch, setPasswordsMatch] = useState(true);
+
+    // Function to handle password change
+    const handlePasswordChange = (value) => {
+        setPassword(value);
+        // Check if passwords match whenever password changes
+        setPasswordsMatch(value === confirmPassword);
+    };
+
+    // Function to handle confirm password change
+    const handleConfirmPasswordChange = (value) => {
+        setConfirmPassword(value);
+        // Check if passwords match whenever confirm password changes
+        setPasswordsMatch(value === password);
+    };
+
+     // Function to handle form submission
+     const handleSubmit = (e) => {
+        e.preventDefault();
+        // Check if passwords match before submitting the form
+        if (password === confirmPassword) {
+            // Passwords match, you can proceed with form submission
+            console.log("Passwords match, proceed with form submission");
+        } else {
+            // Passwords do not match
+            console.log("Passwords do not match");
+        }
+    };
+
+
     return (
         <div className="w-screen h-screen flex justify-center items-center">
             <Navbar />
-            <form className="form">
+            <form className="form" onSubmit={handleSubmit}>
                 <div className="flex-column">
                     <label>Username </label>
                 </div>
@@ -26,6 +58,7 @@ function SignUp() {
                         type="text"
                         className="input-Login"
                         placeholder="Enter your Username"
+                        required
                     />
                 </div>
 
@@ -59,18 +92,19 @@ function SignUp() {
                         type="text"
                         className="input-Login"
                         placeholder="Enter your Email"
+                        required
                     />
                 </div>
 
                 <div className="flex-column">
                     <label>Password </label>
                 </div>
-                <PasswordToggle />
+                <PasswordToggle onChange={handlePasswordChange} />
 
                 <div className="flex-column">
                     <label>Confirm Password </label>
                 </div>
-                <PasswordToggle />
+                <PasswordToggle onChange={handleConfirmPasswordChange} />
 
                 <button className="button-submit">Sign Up</button>
 

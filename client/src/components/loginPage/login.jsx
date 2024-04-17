@@ -6,10 +6,16 @@ import { Link } from "react-router-dom";
 import PasswordToggle from "./passwordToggle";
 
 function LoginPage() {
+
+    // Function to handle form submission
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    };
+
     return (
         <div className="w-screen h-screen flex justify-center items-center">
             <Navbar />
-            <form className="form">
+            <form className="form" onSubmit={handleSubmit}>
                 <div className="flex-column">
                     <label>Email </label>
                 </div>
@@ -28,6 +34,7 @@ function LoginPage() {
                         type="text"
                         className="input-Login"
                         placeholder="Enter your Email"
+                        required
                     />
                 </div>
 
@@ -35,7 +42,7 @@ function LoginPage() {
                     <label>Password </label>
                 </div>
                
-                    <PasswordToggle />
+                    <PasswordToggle/>
 
                 <div className="flex-row">
                     <div>

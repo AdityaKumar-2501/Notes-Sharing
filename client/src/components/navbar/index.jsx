@@ -46,7 +46,7 @@ const pages = [
 
 function Navbar() {
     const nav = useNavigate();
-    const [input, setInput] = useState("");
+    // const [input, setInput] = useState("");
 
     // const handleSeach = (value) => {
     //     setInput(value);
@@ -213,10 +213,14 @@ function Navbar() {
                                     name="text"
                                     placeholder="Search..."
                                     type="search"
+                                    onChange={(e) =>
+                                        handleSeach(e.target.value)
+                                    }
                                 />
                                 <IoSearchSharp
-                                    onClick={(e) => handleSeach(e.target.value)}
+                                    // onClick={}
                                     size={25}
+                                    className="cursor-pointer ml-2"
                                 />
                             </div>
                             <Stack
@@ -225,7 +229,7 @@ function Navbar() {
                                 className="btn-group px-10"
                             >
                                 <Link to="/login">
-                                    <Button variant="outlined">Login</Button>
+                                    <Button variant="outlined">Sign in</Button>
                                 </Link>
                             </Stack>
                         </div>
