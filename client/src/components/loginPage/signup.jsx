@@ -32,6 +32,8 @@ function SignUp() {
         } else {
             // Passwords do not match
             console.log("Passwords do not match");
+        
+            return (<div className="text-red-600">Passwords do not match</div>)
         }
     };
 

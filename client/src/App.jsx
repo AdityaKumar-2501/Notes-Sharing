@@ -11,6 +11,7 @@ import NotesPage from "./components/notesPage/mainPage";
 import FolderPage from "./components/folderPage/folderPage";
 import LoginPage from "./components/loginPage/login";
 import SignUp from "./components/loginPage/signup";
+import UploadForm from "./components/uploadForm/upload-form";
 
 function App() {
     return (
@@ -18,7 +19,7 @@ function App() {
             <div className="app">
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/upload" element={<Upload />} />
+                    <Route path="/upload" element={<UploadForm />} />
                     <Route path="/notes/:id" element={<NotesPage />} />
                     <Route path="/folder/:id" element={<FolderPage />} />
                     <Route path="/login" element={<LoginPage />} />
