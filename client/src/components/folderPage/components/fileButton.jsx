@@ -90,7 +90,7 @@ function PDFButton() {
 }
 
 function DefaultButton(title) {
-    console.log(title.split("-").pop());
+    console.log(title,title.split("-").pop());
     return (
         <div className="">
             {/* <span className="doc-icon pdf">☷</span>

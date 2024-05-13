@@ -8,7 +8,7 @@ var cors = require('cors')
 // Load environment variables
 require('dotenv').config();
 
-// OAuth2 client setup
+// OAuth2client setup
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
@@ -21,7 +21,6 @@ oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 const drive = google.drive({ version: 'v3', auth: oauth2Client });
 
 const app = express();
-
 
 app.use(cors())
 

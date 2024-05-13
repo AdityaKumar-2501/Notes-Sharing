@@ -1,65 +1,73 @@
 import React, { useState, useRef } from "react";
-import Navbar from "../navbar";
-import "./styles.css";
+import axios from "axios";
 import { Toaster, toast } from "sonner";
+import Navbar from "../navbar";
+import './styles.css';
 
 function UploadForm() {
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        subject: "",
-        topic: "",
-        college: "",
-        message: "",
-        isUploaded: false,
-    });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    topic: "",
+    college: "",
+    message: "",
+  });
+  const [file, setFile] = useState(null);
+  const fileInputRef = useRef(null);
 
-    const fileInputRef = useRef(null); 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevState) => ({
-            ...prevState,
-            [name]: value,
-        }));
-        console.log(formData[name]);
-    };
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+  };
 
-    const handleFileUpload = (e) => {
-        const fileInput = e.target;
-        if (fileInput.files.length > 0) {
-            // File(s) have been selected
-            setFormData((prevState) => ({
-                ...prevState,
-                isUploaded: true,
-            }));
-        } else {
-            // No file selected
-            setFormData((prevState) => ({
-                ...prevState,
-                isUploaded: false,
-            }));
-        }
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        toast.success("File is uploaded successfully");
+    try {
+      const uploadData = new FormData();
+      uploadData.append("name", formData.name);
+      uploadData.append("email", formData.email);
+      uploadData.append("subject", formData.subject);
+      uploadData.append("topic", formData.topic);
+      uploadData.append("college", formData.college);
+      uploadData.append("message", formData.message);
+      uploadData.append("file", file);
+
+      console.log(JSON.stringify(uploadData));
+
+      // Example API endpoint to handle file upload and save to Google Drive
+      const response = await axios.post("/api/upload-to-google-drive", uploadData);
+
+      if (response.data.success) {
+        toast.success("File uploaded successfully");
+        // Clear form fields and file input
         setFormData({
-            name: '',
-            email: '',
-            subject: '',
-            topic: '',
-            college: '',
-            message: '',
-            isUploaded: false
+          name: "",
+          email: "",
+          subject: "",
+          topic: "",
+          college: "",
+          message: "",
         });
-
-        if(fileInputRef.current){
-            fileInputRef.current.value = "";
-        }
-
-    };
+        setFile(null);
+        fileInputRef.current.value = null; // Clear file input
+      } else {
+        toast.error("Error uploading file. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      toast.error("Error uploading file. Please try again later.");
+    }
+  };
 
     return (
         <>
@@ -184,10 +192,10 @@ function UploadForm() {
                                 <input
                                     class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 p-2 "
                                     id="file_input"
-                                    name="isUploaded"
+                                    name="file"
                                     type="file"
                                     ref={fileInputRef}
-                                    onChange={handleFileUpload}
+                                    onChange={handleFileChange}
                                     required
                                 />
                             </div>

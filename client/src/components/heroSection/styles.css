@@ -1,0 +1,7 @@
+.hero-section{
+    background: url("../../assets/alexander-grey-eMP4sYPJ9x0-unsplash.jpg");
+    background-size: cover;
+    height: 80vh;
+    position:relative;
+    top: -45px;
+}

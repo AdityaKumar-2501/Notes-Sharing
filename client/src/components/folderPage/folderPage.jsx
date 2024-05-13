@@ -30,8 +30,6 @@ function FolderPage() {
     return (
         <div className="">
             <Navbar />
-            <h1>Notes</h1>
-            <p>Note Id: {noteId}</p>
             <BackButton/>
             <div
                 className=" mr-[10%] ml-[10%] flex gap-20 px-3 justify-start items-center  w-fit flex-wrap "
